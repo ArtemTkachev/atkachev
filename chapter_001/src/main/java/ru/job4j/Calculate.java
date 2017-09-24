@@ -1,30 +1,29 @@
 package ru.job4j;
 
 /**
-* Class Класс для вывода информации.
-* @author atkachev
-* @since 24.09.2017
-* @version 1
-*/
+ * Class Calculate.
+ * @author atkachev
+ * @since 24.09.2017
+ * @version 1
+ */
 public class Calculate {
 
-/**
-* Вывод строки в консоль.
-* @param args - args
-*/
+	/**
+	 * Method main.
+	 * @param args - args
+	 */
 	public static void main(String[] args) {
 		System.out.println("Hello World");
 	}
 
-
-/**
-* Method echo.
-* @param name Your name.
-* @return Echo plus your name.
-*/
-public String echo(String name) {
-    return "Echo, echo, echo : " + name;
-}
+	/**
+	 * Method echo.
+	 * @param name Your name.
+	 * @return Echo plus your name.
+	 */
+	public String echo(String name) {
+		return "Echo, echo, echo : " + name;
+	}
 
 
 }
