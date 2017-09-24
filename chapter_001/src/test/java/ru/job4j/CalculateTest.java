@@ -1,8 +1,6 @@
 package ru.job4j;
 
 import org.junit.Test;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -12,13 +10,13 @@ import static org.junit.Assert.assertThat;
 * @since 24.09.2017
 * @version 1
 */
-public class CalculateTest{
+public class CalculateTest {
 
 /**
 * Test echo.
 */
 	@Test
-	public void whenTakeNameThenTreeEchoPlusName (){
+	public void whenTakeNameThenTreeEchoPlusName() {
 	String input = "atkachev";
 	String expect = "Echo, echo, echo : atkachev";
 	Calculate calc = new Calculate();

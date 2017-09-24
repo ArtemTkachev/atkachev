@@ -1,5 +1,5 @@
 /**
-*Package for calculate task
+*Package for calculate task.
 *
 *@author atkachev (mailto:art599@yandex.ru)
 *@version 1
