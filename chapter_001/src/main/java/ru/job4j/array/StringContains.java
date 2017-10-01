@@ -2,8 +2,8 @@ package ru.job4j.array;
 
 public class StringContains {
     public boolean contains(String origin, String sub) {
-        char[] orgn = origin.toCharArray();
-        char[] sb = sub.toCharArray();
+        char[] orgn = origin.toLowerCase().toCharArray();
+        char[] sb = sub.toLowerCase().toCharArray();
         int orgnlng = orgn.length;
         int sblng = sb.length;
         int cntfrom = 0;

@@ -10,7 +10,7 @@ public class StringContainsTest {
 @Test
     public  void whenStringOriginContainsStringSubThenTrue() {
         StringContains sc = new StringContains();
-        boolean res = sc.contains("Приветик", "ик");
+        boolean res = sc.contains("Приветик", "при");
         assertThat(res,is(true));
     }
 }
