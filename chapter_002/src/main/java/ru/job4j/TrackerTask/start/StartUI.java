@@ -25,6 +25,24 @@ public class StartUI {
             "2.Bug\r\n" +
             "Select the type of item: ";
 
+    private String createString(Item item) {
+        StringBuilder inform = new StringBuilder();
+        inform.append("\r\n");
+        inform.append("Name: ");
+        inform.append(item.getName());
+        inform.append("\r\n");
+        inform.append("Description: ");
+        inform.append(item.getDescription());
+        inform.append("\r\n");
+        inform.append("Created: ");
+        inform.append(item.getCreate());
+        inform.append("\r\n");
+        inform.append("ID: ");
+        inform.append(item.getId());
+        inform.append("\r\n");
+        return inform.toString();
+    }
+
     private void findByName(Input input, Tracker tracker) {
 
         boolean correct = true;
@@ -36,25 +54,14 @@ public class StartUI {
         }
 
         if (correct) {
-            StringBuilder inform = new StringBuilder();
+            //StringBuilder inform = new StringBuilder();
             Item[] allitems = tracker.findByName(answname);
+            String inform = "";
             for (Item item : allitems) {
-                inform.append("\r\n");
-                inform.append("Name: ");
-                inform.append(item.getName());
-                inform.append("\r\n");
-                inform.append("Description: ");
-                inform.append(item.getDescription());
-                inform.append("\r\n");
-                inform.append("Created: ");
-                inform.append(item.getCreate());
-                inform.append("\r\n");
-                inform.append("ID: ");
-                inform.append(item.getId());
-                inform.append("\r\n");
+               inform = this.createString(item);
             }
-            if (inform.length() != 0) {
-                System.out.println(inform.toString());
+            if (!inform.isEmpty()) {
+                System.out.println(inform);
             } else {
                 System.out.println("There are no items with the same name in the store!\r\n");
             }
@@ -74,23 +81,10 @@ public class StartUI {
         }
 
         if (correct) {
-            StringBuilder inform = new StringBuilder();
+            //StringBuilder inform = new StringBuilder();
             Item item = tracker.findById(answid);
             if (item != null) {
-                inform.append("\r\n");
-                inform.append("Name: ");
-                inform.append(item.getName());
-                inform.append("\r\n");
-                inform.append("Description: ");
-                inform.append(item.getDescription());
-                inform.append("\r\n");
-                inform.append("Created: ");
-                inform.append(item.getCreate());
-                inform.append("\r\n");
-                inform.append("ID: ");
-                inform.append(item.getId());
-                inform.append("\r\n");
-                System.out.println(inform.toString());
+                System.out.println(this.createString(item));
             } else {
                 System.out.println("There are no items with the same ID in the store!\r\n");
             }
@@ -109,25 +103,12 @@ public class StartUI {
         }
 
         if (correct) {
-            StringBuilder inform = new StringBuilder();
+            //StringBuilder inform = new StringBuilder();
             Item item = tracker.findById(answid);
             if (item != null) {
-                inform.append("\r\n");
-                inform.append("Name: ");
-                inform.append(item.getName());
-                inform.append("\r\n");
-                inform.append("Description: ");
-                inform.append(item.getDescription());
-                inform.append("\r\n");
-                inform.append("Created: ");
-                inform.append(item.getCreate());
-                inform.append("\r\n");
-                inform.append("ID: ");
-                inform.append(item.getId());
-                inform.append("\r\n");
-                inform.append("This item was deleted!\r\n");
                 tracker.delete(item);
-                System.out.println(inform.toString());
+                System.out.println(this.createString(item));
+                System.out.println("This item was deleted!\r\n");
             } else {
                 System.out.println("There are no items with the same ID in the store!\r\n");
             }
@@ -145,23 +126,10 @@ public class StartUI {
             error = "The entered item ID is incorrect!";
         }
         if (correct) {
-            StringBuilder inform = new StringBuilder();
+            //StringBuilder inform = new StringBuilder();
             Item item = tracker.findById(answid);
             if (item != null) {
-                inform.append("\r\n");
-                inform.append("Name: ");
-                inform.append(item.getName());
-                inform.append("\r\n");
-                inform.append("Description: ");
-                inform.append(item.getDescription());
-                inform.append("\r\n");
-                inform.append("Created: ");
-                inform.append(item.getCreate());
-                inform.append("\r\n");
-                inform.append("ID: ");
-                inform.append(item.getId());
-                inform.append("\r\n");
-                System.out.println(inform.toString());
+                System.out.println(this.createString(item));
                 String answname = input.ask("Enter the new name of the item: ");
                 String answdesc = input.ask("Enter the new description of the item: ");
                 if (answdesc.isEmpty()) {
@@ -191,24 +159,13 @@ public class StartUI {
     }
 
     private void show(Input input, Tracker tracker) {
-        StringBuilder inform = new StringBuilder();
+        //StringBuilder inform = new StringBuilder();
         Item[] allitems = tracker.findAll();
+        String inform = "";
         for (Item item : allitems) {
-            inform.append("\r\n");
-            inform.append("Name: ");
-            inform.append(item.getName());
-            inform.append("\r\n");
-            inform.append("Description: ");
-            inform.append(item.getDescription());
-            inform.append("\r\n");
-            inform.append("Created: ");
-            inform.append(item.getCreate());
-            inform.append("\r\n");
-            inform.append("ID: ");
-            inform.append(item.getId());
-            inform.append("\r\n");
+            inform = this.createString(item);
         }
-        if (inform.length() != 0) {
+        if (!inform.isEmpty()) {
             System.out.println(inform.toString());
         } else {
             System.out.println("There are no items in the store!\r\n");
