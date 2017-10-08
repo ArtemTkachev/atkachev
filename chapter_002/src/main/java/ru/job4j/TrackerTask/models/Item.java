@@ -20,6 +20,7 @@ public class Item {
     public String getName() {
         return this.name;
     }
+
     public String getDescription() {
         return this.desc;
     }
@@ -31,24 +32,27 @@ public class Item {
     public String getId() {
         return this.id;
     }
+
     public String[] getComments() {
         return this.comments;
     }
 
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
+
     public void setDescription(String desc) {
-       this.desc=desc;
+        this.desc = desc;
     }
 
     public void setCreate(long create) {
-       this.created=create;
+        this.created = create;
     }
 
     public void setId(String id) {
-       this.id = id;
+        this.id = id;
     }
+
     public void setComments(String[] comments) {
         this.comments = comments;
     }
