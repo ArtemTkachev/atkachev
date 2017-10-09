@@ -10,6 +10,6 @@ public class Teacher extends Profession {
     }
 
     public String teach(Student student) {
-        return "Учитель "+ this.getFio()+ " преподает студенту "+ student.getFio();
+        return "Учитель " + this.getFio() + " преподает студенту " + student.getFio();
     }
 }

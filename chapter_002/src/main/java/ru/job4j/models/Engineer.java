@@ -10,6 +10,6 @@ public class Engineer extends Profession {
     }
 
     public String developfor(Employer employer) {
-        return "Инженер "+ this.getFio()+ " работает на заказчика "+ employer.getFio();
+        return "Инженер " + this.getFio() + " работает на заказчика " + employer.getFio();
     }
 }

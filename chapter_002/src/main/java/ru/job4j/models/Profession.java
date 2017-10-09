@@ -6,7 +6,7 @@ public class Profession {
     public boolean degree;
     public int experience;
 
-    public Profession(){
+    public Profession() {
 
     }
 
@@ -20,12 +20,15 @@ public class Profession {
     public String getFio() {
         return this.fio;
     }
+
     public String getSnpassport() {
         return this.snpassport;
     }
+
     public boolean getDegree() {
         return this.degree;
     }
+
     public int getExperience() {
         return this.experience;
     }

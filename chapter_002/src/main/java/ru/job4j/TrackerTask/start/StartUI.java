@@ -3,6 +3,13 @@ package ru.job4j.TrackerTask.start;
 import ru.job4j.TrackerTask.models.*;
 
 public class StartUI {
+    private Input input;
+    private Tracker tracker;
+
+    public StartUI(Input input, Tracker tracker) {
+        this.input = input;
+        this.tracker = tracker;
+    }
 
     private static final String MENU = "0.Add new item\r\n" +
             "1.Show all items\r\n" +
@@ -56,12 +63,12 @@ public class StartUI {
         if (correct) {
             //StringBuilder inform = new StringBuilder();
             Item[] allitems = tracker.findByName(answname);
-            String inform = "";
+            StringBuilder inform = new StringBuilder();
             for (Item item : allitems) {
-               inform = this.createString(item);
+                inform.append(this.createString(item));
             }
-            if (!inform.isEmpty()) {
-                System.out.println(inform);
+            if (inform.length()!=0) {
+                System.out.println(inform.toString());
             } else {
                 System.out.println("There are no items with the same name in the store!\r\n");
             }
@@ -161,11 +168,11 @@ public class StartUI {
     private void show(Input input, Tracker tracker) {
         //StringBuilder inform = new StringBuilder();
         Item[] allitems = tracker.findAll();
-        String inform = "";
+        StringBuilder inform = new StringBuilder();
         for (Item item : allitems) {
-            inform = this.createString(item);
+            inform.append(this.createString(item));
         }
-        if (!inform.isEmpty()) {
+        if (inform.length()!=0) {
             System.out.println(inform.toString());
         } else {
             System.out.println("There are no items in the store!\r\n");
@@ -211,29 +218,32 @@ public class StartUI {
 
     }
 
-    public static void main(String[] args) {
+    public void init() {
         boolean selectexit = true;
         String answer;
-        StartUI sui = new StartUI();
-        Input input = new ConsoleInput();
-        Tracker tracker = new Tracker();
         while (selectexit) {
             answer = input.ask(MENU);
             if (EXIT.equals(answer)) {
                 selectexit = false;
             } else if (FINDBYNAME.equals(answer)) {
-                sui.findByName(input, tracker);
+                this.findByName(input, tracker);
             } else if (FINDBYID.equals(answer)) {
-                sui.findById(input, tracker);
+                this.findById(input, tracker);
             } else if (DELETE.equals(answer)) {
-                sui.delete(input, tracker);
+                this.delete(input, tracker);
             } else if (EDIT.equals(answer)) {
-                sui.edit(input, tracker);
+                this.edit(input, tracker);
             } else if (SHOW.equals(answer)) {
-                sui.show(input, tracker);
+                this.show(input, tracker);
             } else if (ADD.equals(answer)) {
-                sui.add(input, tracker);
+                this.add(input, tracker);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new StartUI(new ConsoleInput(), new Tracker()).init();
+       // new StartUI(new StubInput(new String[]{"1", "2", "3", "4"}), new Tracker()).init();
+
     }
 }
