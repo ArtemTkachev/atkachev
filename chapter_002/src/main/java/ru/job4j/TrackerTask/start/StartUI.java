@@ -252,24 +252,24 @@ public class StartUI {
     */
     public void init() {
         boolean selectexit = true;
-        String answer;
+        int answer;
         MenuTracker menuTracker = new MenuTracker(this.input, this.tracker);
         menuTracker.fillActions();
         while (selectexit) {
             menuTracker.show();
             System.out.println("6. Exit program");
-            answer = input.ask("Select action: ");
-            if ("6".equals(answer))
+            answer = input.ask("Select action: ", menuTracker.actionkeys());
+            if (6==answer)
                 selectexit = false;
             else
-                menuTracker.selectAction(Integer.valueOf(answer));
+                menuTracker.selectAction(answer);
         }
 
 
     }
 
     public static void main(String[] args) {
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         Tracker tracker = new Tracker();
         StartUI sui = new StartUI(input, tracker);
         sui.init();

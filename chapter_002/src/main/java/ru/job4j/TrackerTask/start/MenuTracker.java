@@ -58,6 +58,13 @@ public class MenuTracker {
         this.userActions[key].execute(this.input, this.tracker);
     }
 
+    public int[] actionkeys () {
+        int[] keys = new int[this.userActions.length];
+        for (int i = 0; i<this.userActions.length; i++) {
+            keys[i]=userActions[i].key();
+        }
+        return keys;
+    }
 
     private class AddItem implements UserAction {
 
