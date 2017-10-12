@@ -257,7 +257,7 @@ public class StartUI {
         menuTracker.fillActions();
         while (selectexit) {
             menuTracker.show();
-            System.out.println("6. Exit program");
+            System.out.println("6 - Exit program");
             answer = input.ask("Select action: ", menuTracker.actionkeys());
             if (6==answer)
                 selectexit = false;
