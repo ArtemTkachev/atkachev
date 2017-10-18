@@ -22,12 +22,11 @@ public class ConvertList {
             int index = 0;
             for (int i=0; i<rows; i++) {
                 for (int y=0; y<count; y++) {
-                    if (list.size() > index) {
-                        arr[i][y] = list.get(index);
+                    if (list.size() > index ) {
+                        if (list.get(index)!=null) {
+                            arr[i][y] = list.get(index);
+                        }
                         index++;
-                    }
-                    else {
-                        arr[i][y] = 0;
                     }
                 }
             }

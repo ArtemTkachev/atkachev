@@ -20,9 +20,9 @@ public class ConvertListTest {
     public void whenListToArrayThenTrue() {
         try {
             ConvertList cl = new ConvertList();
-            List<Integer> resList = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+            List<Integer> resList = Arrays.asList(1, 2, 3, null, 5, 6, 7);
             int[][] resar = cl.toArray(resList, 3);
-            int[][] exceptarr = new int[][] {{1,2,3},{4,5,6},{7,0,0}};
+            int[][] exceptarr = new int[][] {{1,2,3},{0,5,6},{7,0,0}};
             assertThat(resar, is(exceptarr));
         } catch (Exception e) {
             System.out.println(e);
