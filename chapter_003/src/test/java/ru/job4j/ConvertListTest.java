@@ -3,6 +3,7 @@ package ru.job4j;
 import org.junit.Test;
 import java.util.*;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class ConvertListTest {
@@ -27,5 +28,18 @@ public class ConvertListTest {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    @Test
+    public void whenListofArraysConvertToListThenList() {
+        ConvertList cl = new ConvertList();
+        List<int[]> list = new ArrayList<int[]>();
+        list.add(new int[] {1,2});
+        list.add(new int[] {4,5,6});
+        list.add(new int[] {7,8,9});
+        list.add(null);
+        List<Integer> result = cl.convert(list);
+        List<Integer> excepted = Arrays.asList(1,2,4,5,6,7,8,9);
+        assertThat(result,is(excepted));
     }
 }
