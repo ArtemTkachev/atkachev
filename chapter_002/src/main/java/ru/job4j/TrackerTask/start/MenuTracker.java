@@ -3,6 +3,8 @@ package ru.job4j.TrackerTask.start;
 
 import ru.job4j.TrackerTask.models.Item;
 
+import java.util.ArrayList;
+
 
 class FindItemsByName extends BaseAction {
 
@@ -17,7 +19,7 @@ class FindItemsByName extends BaseAction {
 */
     public void execute(Input input, Tracker tracker) {
         String answname = input.ask("Enter the name of the item: ");
-        Item[] items = tracker.findByName(answname);
+        ArrayList<Item> items = tracker.findByName(answname);
         for (Item item : items) {
             System.out.println(String.format("ID: %s Name: %s", item.getId(), item.getName()));
         }
@@ -34,7 +36,7 @@ public class MenuTracker {
 
     private Input input;
     private Tracker tracker;
-    private BaseAction[] userActions = new BaseAction[6];
+    private ArrayList<BaseAction> userActions = new ArrayList<BaseAction>();
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -42,12 +44,12 @@ public class MenuTracker {
     }
 
     public void fillActions() {
-        this.userActions[0] = this.new AddItem("Add new item",0);
-        this.userActions[1] = new MenuTracker.ShowAllItems("Show all items", 1);
-        this.userActions[2] = new EditItem("Edit item", 2);
-        this.userActions[3] = new DeleteItem("Delete item", 3);
-        this.userActions[4] = new FindItemById("Find item by id", 4);
-        this.userActions[5] = new FindItemsByName("Find items by name",5);
+        this.userActions.add(this.new AddItem("Add new item",0));
+        this.userActions.add(new MenuTracker.ShowAllItems("Show all items", 1));
+        this.userActions.add(new EditItem("Edit item", 2));
+        this.userActions.add(new DeleteItem("Delete item", 3));
+        this.userActions.add(new FindItemById("Find item by id", 4));
+        this.userActions.add(new FindItemsByName("Find items by name",5));
     }
 
     public void show() {
@@ -59,13 +61,13 @@ public class MenuTracker {
     }
 
     public void selectAction(int key) {
-        this.userActions[key].execute(this.input, this.tracker);
+        this.userActions.get(key).execute(this.input, this.tracker);
     }
 
     public int[] actionkeys() {
-        int[] keys = new int[this.userActions.length];
-        for (int i = 0; i < this.userActions.length; i++) {
-            keys[i] = userActions[i].GetKey();
+        int[] keys = new int[this.userActions.size()];
+        for (int i = 0; i < this.userActions.size(); i++) {
+            keys[i] = userActions.get(i).GetKey();
         }
         return keys;
     }

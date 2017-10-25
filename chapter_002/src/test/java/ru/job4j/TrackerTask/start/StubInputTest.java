@@ -11,10 +11,10 @@ public class StubInputTest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "1", "task1", "desc1", "6"});
+        Input input = new StubInput(new String[]{"0", "task1", "desc1", "6"});
         StartUI sui = new StartUI(input, tracker);
         sui.init();
-        assertThat(tracker.findByName("task1")[0].getName(), is("task1"));
+        assertThat(tracker.findByName("task1").get(0).getName(), is("task1"));
     }
 
     @Test
@@ -29,7 +29,7 @@ public class StubInputTest {
         Input input = new StubInput(new String[]{"1", "6"});
         StartUI sui = new StartUI(input, tracker);
         sui.init();
-        assertThat(tracker.findAll().length, is(3));
+        assertThat(tracker.findAll().size(), is(3));
     }
 
 
@@ -81,7 +81,7 @@ public class StubInputTest {
         Input input = new StubInput(new String[]{"5", "task1", "6"});
         StartUI sui = new StartUI(input, tracker);
         sui.init();
-        assertThat(tracker.findByName("task1").length, is(2));
+        assertThat(tracker.findByName("task1").size(), is(2));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class StubInputTest {
         Input input = new StubInput(new String[]{"6"});
         StartUI sui = new StartUI(input, tracker);
         sui.init();
-        assertThat(tracker.findAll().length, is(0));
+        assertThat(tracker.findAll().size(), is(0));
     }
 
 

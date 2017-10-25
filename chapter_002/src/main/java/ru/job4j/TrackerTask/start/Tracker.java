@@ -2,24 +2,24 @@ package ru.job4j.TrackerTask.start;
 
 import ru.job4j.TrackerTask.models.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Tracker {
-    private Item[] items = new Item[100];
-    private int count = 0;
+    private ArrayList<Item> items = new ArrayList<Item>();
     private static final Random RN = new Random();
 
     public Item add(Item item) {
         item.setId(String.valueOf(System.currentTimeMillis() + RN.nextInt()));
-        items[count++] = item;
+        items.add(item);
         return item;
     }
 
     public void update(Item item) {
         String id = item.getId();
-        for (int i = 0; i < this.count; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
-                items[i] = item;
+        for (int i = 0; i < this.items.size(); i++) {
+            if (items.get(i) != null && items.get(i).getId().equals(id)) {
+                items.set(i,item);
                 break;
             }
         }
@@ -27,41 +27,33 @@ public class Tracker {
 
     public void delete(Item item) {
         String id = item.getId();
-        for (int i = 0; i < this.count; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
-                items[i] = null;
+        for (int i = 0; i < this.items.size(); i++) {
+            if (items.get(i) != null && items.get(i).getId().equals(id)) {
+                items.set(i,null);
                 break;
             }
         }
 
     }
 
-    public Item[] findAll() {
-        Item[] findAll = new Item[this.count];
-        int y = 0;
-        for (int i = 0; i < this.count; i++) {
-            if (this.items[i] != null) {
-                findAll[y] = this.items[i];
-                y++;
+    public  ArrayList<Item> findAll() {
+        ArrayList<Item> findAll = new ArrayList<Item>();
+        for (int i = 0; i < this.items.size(); i++) {
+            if (this.items.get(i) != null) {
+                findAll.add(this.items.get(i));
             }
         }
-        Item[] result = new Item[y];
-        System.arraycopy(findAll, 0, result, 0, y);
-        return result;
+        return findAll;
     }
 
-    public Item[] findByName(String key) {
-        Item[] findnames = new Item[this.count];
-        int y = 0;
-        for (int i = 0; i < this.count; i++) {
-            if (this.items[i] != null && this.items[i].getName().equals(key)) {
-                findnames[y] = this.items[i];
-                y++;
+    public ArrayList<Item> findByName(String key) {
+        ArrayList<Item> findnames = new ArrayList<Item>();
+        for (int i = 0; i < this.items.size(); i++) {
+            if (this.items.get(i) != null && this.items.get(i).getName().equals(key)) {
+                findnames.add(this.items.get(i));
             }
         }
-        Item[] result = new Item[y];
-        System.arraycopy(findnames, 0, result, 0, y);
-        return result;
+        return findnames;
     }
 
     public Item findById(String id) {
