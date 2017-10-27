@@ -17,9 +17,11 @@ public class SortUserTest {
         List<UserSort> list = Arrays.asList(new UserSort("Иван",12),
                 new UserSort("Петр",33),
                 new UserSort("Максим", 21),
+                new UserSort("Игорь", 21),
                 new UserSort("Игнат", 6));
         Set<UserSort> resultSet = sortUser.sort(list);
         UserSort[] usersex = new UserSort[] {new UserSort("Петр",33),
+                new UserSort("Игорь", 21),
                 new UserSort("Максим",21),
                 new UserSort("Иван", 12),
                 new UserSort("Игнат", 6)};
