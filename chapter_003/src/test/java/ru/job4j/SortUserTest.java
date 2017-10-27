@@ -29,4 +29,41 @@ public class SortUserTest {
         assertThat(usersres,is(usersex));
 
     }
+
+    @Test
+    public void whenSortListForLengthNamesThenTrueSort() {
+        SortUser sortUser = new SortUser();
+        List<UserSort> list = Arrays.asList(new UserSort("Иван",12),
+                new UserSort("Петр",33),
+                new UserSort("Максим", 21),
+                new UserSort("Игорь", 21),
+                new UserSort("Игнат", 6));
+        List<UserSort> resultList = sortUser.sortNameLength(list);
+        UserSort[] usersex = new UserSort[] { new UserSort("Максим",21),
+                new UserSort("Игорь", 21),
+                new UserSort("Игнат", 6),
+                new UserSort("Иван", 12),
+                new UserSort("Петр",33)};
+        UserSort[] usersres = resultList.toArray( new UserSort[resultList.size()]);
+        assertThat(usersres,is(usersex));
+
+    }
+
+    @Test
+    public void whenSortListForNamesAndAgesThenTrueSort() {
+        SortUser sortUser = new SortUser();
+        List<UserSort> list = Arrays.asList(new UserSort("Сергей",25),
+                new UserSort("Иван",30),
+                new UserSort("Сергей", 20),
+                new UserSort("Иван", 25));
+        List<UserSort> resultList = sortUser.sortByAllFields(list);
+        UserSort[] usersex = new UserSort[] { new UserSort("Иван",25),
+                new UserSort("Иван", 30),
+                new UserSort("Сергей", 20),
+                new UserSort("Сергей", 25)};
+        UserSort[] usersres = resultList.toArray( new UserSort[resultList.size()]);
+        assertThat(usersres,is(usersex));
+
+    }
+
 }
