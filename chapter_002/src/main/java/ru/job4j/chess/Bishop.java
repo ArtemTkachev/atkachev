@@ -10,51 +10,27 @@ public class Bishop extends Figure {
 
     @Override
     public Cell[] way(Cell dist) throws ImposibleMoveException {
-        int x = dist.getX();
-        int y = dist.getY();
-        if (x < 8 && y < 8) {
-            boolean ready = false;
-            Cell[] cells = new Cell[8];
+        int xd = dist.getX();
+        int yd = dist.getY();
+        int xp = this.getPosition().getX();
+        int yp = this.getPosition().getY();
+        if (xd < 8 && yd < 8) {
+            Cell[] cells = new Cell[7];
             int index = 0;
-            int sec = 0, srX = 0, srY = 0;
-            for (int z = 1; z <= 4; z++) {
-                while ((z == 1 && x + sec <= 7 && y + sec <= 7) ||
-                        (z == 2 && x + sec <= 7 && y - sec >= 0) ||
-                        (z == 3 && x - sec >= 0 && y - sec >= 0) ||
-                        (z == 4 && x - sec >= 0 && y + sec <= 7)) {
-                    if (z == 1 || z == 2) {
-                        srX = x + sec;
-                    } else {
-                        srX = x - sec;
-                    }
-                    if (z == 1 || z == 4) {
-                        srY = y + sec;
-                    } else {
-                        srY = y - sec;
-                    }
-                    Cell cell = new Cell(srX, srY);
-                    if (this.rightCell(cell)) {
-                        ready = true;
-                        break;
-                    }
-                    cells[index++] = cell;
-                    sec++;
-                }
-                if (ready) {
-                    break;
-                } else {
-                    index = 0;
-                    sec = 0;
-                    Arrays.fill(cells, null);
-                }
-            }
-            if (ready) {
-                Cell[] retWay = new Cell[index];
-                System.arraycopy(cells, 0, retWay, 0, index);
-                return retWay;
-            } else {
+            int deltax = xd - xp;
+            int fx = deltax < 0 ? -1 : 1;
+            int deltay = yd - yp;
+            int fy = deltay < 0 ? -1 : 1;
+            if (Math.abs(deltax) != Math.abs(deltay)) {
                 throw new ImposibleMoveException();
             }
+            for (int z = 0; z < Math.abs(deltax); z++) {
+                Cell cell = new Cell(xd - z * fx, yd - z * fy);
+                cells[index++] = cell;
+            }
+            Cell[] retWay = new Cell[index];
+            System.arraycopy(cells, 0, retWay, 0, index);
+            return retWay;
         } else {
             throw new ImposibleMoveException();
         }

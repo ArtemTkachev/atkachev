@@ -26,6 +26,10 @@ public abstract class Figure {
        return this.isWhite;
     }
 
-   public abstract Cell[] way(Cell dist) throws ImposibleMoveException;
+    public Cell getPosition() {
+        return position;
+    }
+
+    public abstract Cell[] way(Cell dist) throws ImposibleMoveException;
 
 }
