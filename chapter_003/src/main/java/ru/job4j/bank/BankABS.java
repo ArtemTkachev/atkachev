@@ -11,11 +11,9 @@ public class BankABS {
     }
 
     public void addUser(User user) {
-        if (!bankDbAccs.containsKey(user)) {
-            ArrayList<Account> accountArrayList = new ArrayList<Account>();
-            accountArrayList.add(new Account(0, String.valueOf(System.currentTimeMillis() + rnd.nextInt())));
-            bankDbAccs.put(user, accountArrayList);
-        } else {
+        ArrayList<Account> accountArrayList = new ArrayList<Account>();
+        accountArrayList.add(new Account(0, String.valueOf(System.currentTimeMillis() + rnd.nextInt())));
+        if (this.bankDbAccs.putIfAbsent(user, accountArrayList) != null) {
             throw new UserPresentException();
         }
     }

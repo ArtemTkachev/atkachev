@@ -15,6 +15,7 @@ public class BankABSTest {
         try {
             User user = new User("Петрович", "600315637");
             bankABS.addUser(user);
+            bankABS.addUser(user);
             TreeMap<User, ArrayList<Account>> testMap = bankABS.getMap();
             assertThat(testMap.containsKey(user), is(true));
         } catch (UserPresentException upe) {
