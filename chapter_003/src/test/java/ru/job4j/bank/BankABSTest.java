@@ -1,4 +1,4 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 
 import org.junit.Test;
 
@@ -41,7 +41,7 @@ public class BankABSTest {
             User user = new User("Петрович", "600315637");
             bankABS.addUser(user);
             Account account = new Account(10000, String.valueOf(System.currentTimeMillis() + new Random(100).nextInt()));
-            bankABS.addAccountToUser(user, account);
+           bankABS.addAccountToUser(user, account);
             TreeMap<User, ArrayList<Account>> testMap = bankABS.getMap();
             assertThat(testMap.get(user).contains(account), is(true));
         } catch (UserNotPresentException | UserPresentException unpe) {
@@ -52,6 +52,7 @@ public class BankABSTest {
     @Test
     public void whenDeleteAccountFromUserThenUserHaveNotAccount() {
         try {
+
             User user = new User("Петрович", "600315637");
             bankABS.addUser(user);
             Account account = new Account(10000, String.valueOf(System.currentTimeMillis() + new Random(100).nextInt()));

@@ -1,6 +1,4 @@
-package ru.job4j.Bank;
-
-import java.util.Comparator;
+package ru.job4j.bank;
 
 public class User implements Comparable<User> {
     private String name;

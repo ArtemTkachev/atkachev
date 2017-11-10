@@ -1,4 +1,4 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 
 public class Account implements Comparable<Account> {
     private double value;
