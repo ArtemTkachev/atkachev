@@ -14,10 +14,12 @@ public class EvenIteratorTest {
 
     private Iterator<Integer> it;
 
+
     @Before
     public void setUp() {
         it = new ArrEvenIterator(new int[]{1, 2, 3, 4, 5, 6, 7});
     }
+
 
     @Test(expected = NoSuchElementException.class)
     public void shouldReturnEvenNumbersSequentially() {
@@ -31,6 +33,7 @@ public class EvenIteratorTest {
         it.next();
     }
 
+
     @Test
     public void sequentialHasNextInvocationDoesntAffectRetrievalOrder() {
         assertThat(it.hasNext(), is(true));
@@ -39,6 +42,7 @@ public class EvenIteratorTest {
         assertThat(it.next(), is(4));
         assertThat(it.next(), is(6));
     }
+
 
     @Test
     public void shouldReturnFalseIfNoAnyEvenNumbers() {

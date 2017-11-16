@@ -12,6 +12,7 @@ public class ArrEvenIterator implements Iterator {
         this.values = values;
     }
 
+
     public int nextIndex() {
         int indx = inxin;
         while (indx < values.length) {
@@ -24,10 +25,12 @@ public class ArrEvenIterator implements Iterator {
         return -1;
     }
 
+
     @Override
     public boolean hasNext() {
         return this.nextIndex() != -1;
     }
+
 
     @Override
     public Object next() {
@@ -39,4 +42,5 @@ public class ArrEvenIterator implements Iterator {
             throw new NoSuchElementException();
         }
     }
+
 }
