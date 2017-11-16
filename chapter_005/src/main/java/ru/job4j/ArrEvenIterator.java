@@ -12,25 +12,28 @@ public class ArrEvenIterator implements Iterator {
         this.values = values;
     }
 
-    public boolean hasValue() {
-        while (inxin < values.length) {
-            if (values[inxin] % 2 == 0) {
-                return true;
+    public int nextIndex() {
+        int indx = inxin;
+        while (indx < values.length) {
+            if (values[indx] % 2 == 0) {
+                return indx;
             } else {
-                inxin++;
+                indx++;
             }
         }
-        return false;
+        return -1;
     }
 
     @Override
     public boolean hasNext() {
-        return hasValue();
+        return this.nextIndex() != -1;
     }
 
     @Override
     public Object next() {
-        if (hasValue()) {
+        int indx = this.nextIndex();
+        if (indx != -1) {
+            inxin = indx;
             return values[inxin++];
         } else {
             throw new NoSuchElementException();
