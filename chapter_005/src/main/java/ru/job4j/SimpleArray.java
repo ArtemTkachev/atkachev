@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class SimpleArray<T> {
 
-    Object[] objects;
-    int index = 0;
+    private Object[] objects;
+    private int index = 0;
 
     public SimpleArray(int size) {
         this.objects = new Object[size];
