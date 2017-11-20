@@ -20,8 +20,12 @@ public class SimpleArray<T> {
         }
     }
 
+    private boolean correctSet(int pos) {
+        return pos >= 0 && pos < objects.length;
+    }
+
     public T get(int pos) {
-        if (pos >= 0 && pos < objects.length) {
+        if (correctSet(pos)) {
             return (T) this.objects[pos];
         } else {
             throw new ArrayIndexOutOfBoundsException();
@@ -29,7 +33,7 @@ public class SimpleArray<T> {
     }
 
     public boolean delete(int pos) {
-        if (pos >= 0 && pos < objects.length) {
+        if (correctSet(pos)) {
             this.objects[pos] = null;
             return true;
         } else {
