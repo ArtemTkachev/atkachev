@@ -1,8 +1,8 @@
 package ru.job4j;
 
-public abstract class AbstractStore implements Store{
+public abstract class AbstractStore<T extends Base> implements Store<T>{
     private int size;
-    private SimpleArray<Base> simpleArray;
+    private SimpleArray<T> simpleArray;
     public AbstractStore(int size) {
         this.size = size;
         this.simpleArray = new SimpleArray<>(size);
@@ -10,19 +10,19 @@ public abstract class AbstractStore implements Store{
 
 
     @Override
-    public Base add(Base model) {
+    public T add(T model) {
         return simpleArray.add(model);
     }
 
     @Override
-    public Base update(Base model) {
+    public T update(T model) {
         return simpleArray.update(model);
     }
 
     @Override
     public boolean delete(String id) {
         for(int i = 0; i < size; i++) {
-            Base model = simpleArray.get(i);
+            T model = simpleArray.get(i);
             if (model!=null && model.getId().equals(id)) {
                 return simpleArray.delete(i);
             }
