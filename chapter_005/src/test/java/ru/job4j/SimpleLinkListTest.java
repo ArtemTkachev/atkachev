@@ -52,6 +52,25 @@ public class SimpleLinkListTest {
         assertThat(res2,is("Игнат"));
     }
 
+    @Test
+    public void whenRemoveElFromSllWithThreeElThenReturnRemEl() {
+        stringSimpleLinkList.add("Николай");
+        stringSimpleLinkList.add("Петр");
+        stringSimpleLinkList.add("Иван");
+        String res = stringSimpleLinkList.remove(1);
+        assertThat(res,is("Петр"));
+        assertThat(stringSimpleLinkList.getSize(),is(2));
+    }
+
+    @Test
+    public void whenSetElToSllWithThreeElThenSllHaveSetEl() {
+        stringSimpleLinkList.add("Николай");
+        stringSimpleLinkList.add("Петр");
+        stringSimpleLinkList.add("Иван");
+        stringSimpleLinkList.set(1,"Сергей");
+        assertThat(stringSimpleLinkList.get(1),is("Сергей"));
+    }
+
     @Test(expected = NoSuchElementException.class)
     public void hasNextNextSequentialInvocation () {
         stringSimpleLinkList.add("Николай");

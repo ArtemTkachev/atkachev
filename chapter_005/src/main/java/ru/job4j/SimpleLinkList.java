@@ -39,16 +39,50 @@ public class SimpleLinkList<E> implements ListContainer<E> {
         return 0 <= pos && pos < size;
     }
 
-    private E getFirst() {
-        return first.item;
+
+    public int getSize() {
+        return size;
     }
 
-    private E getLast() {
-        return last.item;
+    public E remove(int index) {
+        if (correctIndex(index)) {
+            Element<E> findElement = getEl(index);
+            if (index != size - 1) {
+                findElement.next.prev = findElement.prev;
+            } else {
+                last = findElement.prev;
+            }
+            if (index != 0) {
+                findElement.prev.next = findElement.next;
+            } else {
+                first = findElement.next;
+            }
+            E retVal = findElement.item;
+            findElement = null;
+            size--;
+            return retVal;
+        } else
+            throw new NoSuchElementException();
     }
 
-    private E getSingle(int index) {
-        E returnElement = null;
+    public void set(int index, E e) {
+        if (correctIndex(index)) {
+                getEl(index).item = e;
+        } else
+            throw new NoSuchElementException();
+    }
+
+    @Override
+    public E get(int index) {
+        if (correctIndex(index)) {
+            return getEl(index).item;
+        } else
+            throw new NoSuchElementException();
+    }
+
+
+    private Element<E> getSingle(int index) {
+        Element<E> returnElement = null;
         int pos;
         int crmnt;
         Element<E> el;
@@ -64,30 +98,27 @@ public class SimpleLinkList<E> implements ListContainer<E> {
         do {
             pos = pos + crmnt;
             if (pos == index) {
-                returnElement = el.item;
+                returnElement = el;
             }
             el = crmnt == 1 ? el.next : el.prev;
         } while (pos != index);
         return returnElement;
     }
 
-    @Override
-    public E get(int index) {
-        E returnEl = null;
-        if (correctIndex(index)) {
-            switch (size) {
-                case 1:
-                    returnEl = getFirst();
-                    break;
-                case 2:
-                    returnEl = index == 0 ? getFirst() : getLast();
-                    break;
-                default:
-                    returnEl = getSingle(index);
-                    break;
-            }
-        } else
-            throw new NoSuchElementException();
+
+    private Element<E> getEl(int index) {
+        Element<E> returnEl = null;
+        switch (size) {
+            case 1:
+                returnEl = first;
+                break;
+            case 2:
+                returnEl = index == 0 ? first : last;
+                break;
+            default:
+                returnEl = getSingle(index);
+                break;
+        }
         return returnEl;
     }
 
@@ -97,6 +128,7 @@ public class SimpleLinkList<E> implements ListContainer<E> {
             private int itIndex = 0;
             Element<E> el = first;
             Element<E> retEl;
+
             @Override
             public boolean hasNext() {
                 return correctIndex(itIndex);
@@ -109,8 +141,7 @@ public class SimpleLinkList<E> implements ListContainer<E> {
                     el = el.next;
                     itIndex++;
                     return retEl.item;
-                }
-                else
+                } else
                     throw new NoSuchElementException();
             }
         };
