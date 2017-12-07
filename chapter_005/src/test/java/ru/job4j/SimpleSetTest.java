@@ -33,6 +33,23 @@ public class SimpleSetTest {
         assertThat(stringSimpleSet.getSize(), is(3));
     }
 
+
+    @Test
+    public void whenAddMore10ElToSsThenSsGrowUp() {
+        stringSimpleSet.add("Николай");
+        stringSimpleSet.add("Петр");
+        stringSimpleSet.add("Иван");
+        stringSimpleSet.add("Антон");
+        stringSimpleSet.add("Борис");
+        stringSimpleSet.add("Влад");
+        stringSimpleSet.add("Игнат");
+        stringSimpleSet.add("Михей");
+        stringSimpleSet.add("Артем");
+        stringSimpleSet.add("Игорь");
+        stringSimpleSet.add("Джонни");
+        assertThat(stringSimpleSet.getContainer()[10], is("Джонни"));
+    }
+
     @Test(expected = NoSuchElementException.class)
     public void hasNextNextSequentialInvocation() {
         stringSimpleSet.add("Николай");

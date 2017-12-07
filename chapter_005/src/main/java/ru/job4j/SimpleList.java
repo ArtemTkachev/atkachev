@@ -8,8 +8,26 @@ public class SimpleList<E> implements ListContainer<E> {
     private Object[] container = new Object[10];
     private int index = 0;
 
+    public Object[] getContainer() {
+        return container;
+    }
+
+    public void setContainer(Object[] container) {
+        this.container = container;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+
     public SimpleList() {
     }
+
 
     @Override
     public void add(E e) {
@@ -19,7 +37,7 @@ public class SimpleList<E> implements ListContainer<E> {
         container[index++] = e;
     }
 
-    private void arrayUp() {
+    public void arrayUp() {
         container = Arrays.copyOf(container, container.length * 2);
     }
 

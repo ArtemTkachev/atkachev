@@ -17,7 +17,7 @@ public class SimpleLinkList<E> implements ListContainer<E> {
         Element<E> next;
         Element<E> prev;
 
-        public Element(E item, Element<E> next, Element<E> prev) {
+        Element(E item, Element<E> next, Element<E> prev) {
             this.item = item;
             this.next = next;
             this.prev = prev;

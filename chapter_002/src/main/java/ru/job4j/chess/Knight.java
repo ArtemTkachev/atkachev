@@ -1,6 +1,7 @@
 package ru.job4j.chess;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Knight extends Figure {
 
@@ -73,5 +74,6 @@ public class Knight extends Figure {
             throw new ImposibleMoveException();
         }
     }
+
 
 }

@@ -6,60 +6,44 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class SimpleSet<T> implements SetContainer<T> {
-    private Object[] container = new Object[10];
-    private int num = 0;
+    private final SimpleList<T> simpleList = new SimpleList<>();
+
 
     public Object[] getContainer() {
-        return container;
+        return simpleList.getContainer();
     }
 
     public int getSize() {
-        return num;
+        return simpleList.getIndex();
     }
 
     @Override
     public void add(T t) {
         boolean haveEl = false;
-        if (num > 0)
-            for (int z = 0; z < num; z++) {
-                if (container[z].equals(t)) {
+        int size = getSize();
+        Object[] cntr1 = getContainer();
+        if (size > 0)
+            for (int z = 0; z < size; z++) {
+                if (cntr1[z].equals(t)) {
                     haveEl = true;
                     break;
                 }
             }
         if (!haveEl) {
-            if (num >= container.length) {
-                arrayUp();
+            if (size >= cntr1.length) {
+                simpleList.arrayUp();
             }
-            container[num++] = t;
+            Object[] cntr2 = getContainer();
+            cntr2[size] = t;
+            simpleList.setContainer(cntr2);
+            simpleList.setIndex(size + 1);
         }
-    }
-
-    private void arrayUp() {
-        container = Arrays.copyOf(container, container.length * 2);
-    }
-
-    private boolean correctIndex(int pos) {
-        return 0 <= pos && pos < num;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
-            private int itNum = 0;
-
-            @Override
-            public boolean hasNext() {
-                return correctIndex(itNum);
-            }
-
-            @Override
-            public T next() {
-                if (correctIndex(itNum)) {
-                    return (T) container[itNum++];
-                } else
-                    throw new NoSuchElementException();
-            }
-        };
+        return simpleList.iterator();
     }
+
 }
+
