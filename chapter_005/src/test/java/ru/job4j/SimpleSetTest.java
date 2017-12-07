@@ -21,40 +21,17 @@ public class SimpleSetTest {
     @Test
     public void whenAddElToSsThenSsHaveEl() {
         stringSimpleSet.add("Николай");
-        assertThat(stringSimpleSet.getContainer()[0], is("Николай"));
+        Iterator<String> it = stringSimpleSet.iterator();
+        assertThat(it.next(), is("Николай"));
     }
 
-    @Test
-    public void whenAddElDblToSsThenSsHaveOldEl() {
-        stringSimpleSet.add("Николай");
-        stringSimpleSet.add("Петр");
-        stringSimpleSet.add("Иван");
-        stringSimpleSet.add("Петр");
-        assertThat(stringSimpleSet.getSize(), is(3));
-    }
-
-
-    @Test
-    public void whenAddMore10ElToSsThenSsGrowUp() {
-        stringSimpleSet.add("Николай");
-        stringSimpleSet.add("Петр");
-        stringSimpleSet.add("Иван");
-        stringSimpleSet.add("Антон");
-        stringSimpleSet.add("Борис");
-        stringSimpleSet.add("Влад");
-        stringSimpleSet.add("Игнат");
-        stringSimpleSet.add("Михей");
-        stringSimpleSet.add("Артем");
-        stringSimpleSet.add("Игорь");
-        stringSimpleSet.add("Джонни");
-        assertThat(stringSimpleSet.getContainer()[10], is("Джонни"));
-    }
 
     @Test(expected = NoSuchElementException.class)
-    public void hasNextNextSequentialInvocation() {
+    public void hasNextNextSequentialInvocationNoDupl () {
         stringSimpleSet.add("Николай");
         stringSimpleSet.add("Петр");
         stringSimpleSet.add("Иван");
+        stringSimpleSet.add("Петр");
         Iterator<String> it = stringSimpleSet.iterator();
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is("Николай"));
