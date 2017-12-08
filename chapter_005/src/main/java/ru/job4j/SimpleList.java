@@ -29,12 +29,13 @@ public class SimpleList<E> implements ListContainer<E> {
 
     public boolean contains(E e) {
         boolean res = false;
-        for(int z = 0; z<index; z++) {
-            if(container[z].equals(e)) {
-                res = true;
-                break;
+        if (index > 0)
+            for (int z = 0; z < index; z++) {
+                if (container[z].equals(e)) {
+                    res = true;
+                    break;
+                }
             }
-        }
         return res;
     }
 
