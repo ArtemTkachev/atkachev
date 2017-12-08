@@ -7,15 +7,7 @@ public class SimpleLinkSet<T> implements SetContainer<T> {
 
     @Override
     public void add(T t) {
-        boolean flag = false;
-        Iterator<T> iterator = simpleLinkList.iterator();
-        while (iterator.hasNext()) {
-            if(iterator.next().equals(t)) {
-                flag = true;
-                break;
-            }
-        }
-        if (!flag) {
+        if(!simpleLinkList.contains(t)) {
             simpleLinkList.add(t);
         }
     }

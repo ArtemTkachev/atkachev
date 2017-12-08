@@ -40,6 +40,14 @@ public class SimpleLinkListTest {
     }
 
     @Test
+    public void whenAddElToSLThenContainsWhisEl() {
+        stringSimpleLinkList.add("Николай");
+        stringSimpleLinkList.add("Игорь");
+        stringSimpleLinkList.add("Борис");
+        assertThat(stringSimpleLinkList.contains("Игорь"),is(true));
+    }
+
+    @Test
     public void whenGetElFromSllWithFiveElThenReturnWhisEl() {
         stringSimpleLinkList.add("Николай");
         stringSimpleLinkList.add("Петр");

@@ -67,7 +67,7 @@ public class SimpleLinkList<E> implements ListContainer<E> {
 
     public void set(int index, E e) {
         if (correctIndex(index)) {
-                getEl(index).item = e;
+            getEl(index).item = e;
         } else
             throw new NoSuchElementException();
     }
@@ -80,6 +80,20 @@ public class SimpleLinkList<E> implements ListContainer<E> {
             throw new NoSuchElementException();
     }
 
+    public boolean contains(E e) {
+        boolean res = false;
+        if (size > 0) {
+            Element<E> el = first;
+            while (el != null) {
+                if (el.item.equals(e)) {
+                    res = true;
+                    break;
+                }
+                el = el.next;
+            }
+        }
+        return res;
+    }
 
     private Element<E> getSingle(int index) {
         Element<E> returnElement = null;
