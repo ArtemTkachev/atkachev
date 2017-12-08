@@ -33,6 +33,15 @@ public class SimpleListTest {
     }
 
     @Test
+    public void whenAddElToSLThenContainsWhisEl() {
+        stringSimpleList.add("Николай");
+        stringSimpleList.add("Игорь");
+        stringSimpleList.add("Борис");
+        assertThat(stringSimpleList.contains("Игорь"),is(true));
+    }
+
+
+    @Test
     public void whenAddMore10ElToSLThenSlGrowUp() {
         stringSimpleList.add("Николай");
         stringSimpleList.add("Петр");
@@ -48,6 +57,7 @@ public class SimpleListTest {
         String res = stringSimpleList.get(10);
         assertThat(res,is("Джонни"));
     }
+
 
     @Test(expected = NoSuchElementException.class)
     public void hasNextNextSequentialInvocation () {

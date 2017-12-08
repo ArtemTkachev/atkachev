@@ -10,17 +10,9 @@ public class SimpleSet<T> implements SetContainer<T> {
 
     @Override
     public void add(T t) {
-        boolean flag = false;
-        Iterator<T> iterator = simpleList.iterator();
-        while (iterator.hasNext()) {
-            if(iterator.next().equals(t)) {
-                flag = true;
-                break;
-            }
-        }
-        if (!flag) {
-            simpleList.add(t);
-        }
+       if(!simpleList.contains(t)) {
+           simpleList.add(t);
+       }
     }
 
     @Override

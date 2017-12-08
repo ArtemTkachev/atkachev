@@ -27,6 +27,17 @@ public class SimpleList<E> implements ListContainer<E> {
         return 0 <= pos && pos < index;
     }
 
+    public boolean contains(E e) {
+        boolean res = false;
+        for(int z = 0; z<index; z++) {
+            if(container[z].equals(e)) {
+                res = true;
+                break;
+            }
+        }
+        return res;
+    }
+
     @Override
     public E get(int pos) {
         if (correctIndex(pos))
