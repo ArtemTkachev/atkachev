@@ -8,10 +8,12 @@ import static org.hamcrest.Matchers.is;
 
 public class SimpleHashSetTest {
     private SimpleHashSet<String> stringSimpleHashSet;
+    private SimpleHashSet<Integer> integerSimpleHashSet;
 
     @Before
     public void setUp() {
         stringSimpleHashSet = new SimpleHashSet<>();
+        integerSimpleHashSet = new SimpleHashSet<>();
     }
 
     @Test
@@ -20,7 +22,11 @@ public class SimpleHashSetTest {
         stringSimpleHashSet.add("Петр");
         stringSimpleHashSet.add("Ян");
         stringSimpleHashSet.add("Вячеслав");
+        integerSimpleHashSet.add(0);
+        integerSimpleHashSet.add(1);
+        integerSimpleHashSet.add(2);
         assertThat(stringSimpleHashSet.contains("Николай"), is(true));
+        assertThat(integerSimpleHashSet.contains(0),is(true));
     }
 
     @Test
