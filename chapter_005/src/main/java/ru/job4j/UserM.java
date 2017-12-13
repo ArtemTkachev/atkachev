@@ -14,11 +14,15 @@ public class UserM {
     }
 
     @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + children;
-        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserM userM = (UserM) o;
+
+        if (children != userM.children) return false;
+        if (name != null ? !name.equals(userM.name) : userM.name != null) return false;
+        return birthday != null ? birthday.equals(userM.birthday) : userM.birthday == null;
     }
 
     public String getName() {
