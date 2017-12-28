@@ -8,6 +8,10 @@ public class Node<E> {
     private final E value;
 
 
+    public E getValue() {
+        return value;
+    }
+
     public Node(final E value) {
         this.value = value;
     }
