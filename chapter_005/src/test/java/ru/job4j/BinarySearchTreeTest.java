@@ -9,12 +9,12 @@ public class BinarySearchTreeTest {
 
     @Test
     public void when6ElFindLastThen6() {
-        BinarySearchTree<Integer> tree = new BinarySearchTree<>(1);
-        tree.add(2);
-        tree.add(3);
-        tree.add(4);
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>(6);
+        tree.add(7);
         tree.add(5);
-        tree.add(6);
-        assertThat(tree.findBy(6).isPresent(), is(true));
+        tree.add(4);
+        tree.add(1);
+        tree.add(8);
+        assertThat(tree.findBy(8).isPresent(), is(true));
     }
 }

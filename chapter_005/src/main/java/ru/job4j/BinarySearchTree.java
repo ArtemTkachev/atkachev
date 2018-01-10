@@ -16,10 +16,27 @@ public class BinarySearchTree<E extends Comparable<E>> {
             data.offer(this.root);
             while (!data.isEmpty()) {
                 Node<E> el = data.poll();
-                if (el.leaves().size() < 2) {
-                    el.add(new Node<>(e));
-                    rsl = true;
-                    break;
+                int size = el.leaves().size();
+                if (size < 2) {
+                    if (size > 0) {
+                        int cmprrt = el.getValue().compareTo(e);
+                        int cmprchrt = el.getValue().compareTo(el.leaves().get(0).getValue());
+                        if(cmprrt < 0 && cmprchrt >=0 ) {
+                            el.add(new Node<>(e));
+                            rsl = true;
+                        } else if(cmprrt >= 0 && cmprchrt < 0) {
+                            Node<E> supel = el.leaves().get(0);
+                            el.leaves().remove(0);
+                            el.add(new Node<>(e));
+                            el.add(supel);
+                            rsl = true;
+                        }
+                    } else if (size == 0) {
+                        el.add(new Node<>(e));
+                        rsl = true;
+                    }
+                    if (rsl)
+                        break;
                 }
                 for (Node<E> child : el.leaves()) {
                     data.offer(child);
