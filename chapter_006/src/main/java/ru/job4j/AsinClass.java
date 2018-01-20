@@ -35,8 +35,33 @@ public class AsinClass {
     }
 
     public static void main(String[] args) {
-        new Thread(new Calculate("spcs")).start();
-        new Thread(new Calculate("words")).start();
+
+        Thread tStart = new Thread() {
+            @Override
+            public void run() {
+                System.out.println("Start");
+            }
+        };
+        Thread tSpcs =  new Thread(new Calculate("spcs"));
+        Thread tWords = new Thread(new Calculate("words"));
+        Thread tFinish = new Thread() {
+            @Override
+            public void run() {
+                System.out.println("Finish");
+            }
+        };
+
+        try {
+            tStart.start();
+            tStart.join();
+            tSpcs.start();
+            tWords.start();
+            tSpcs.join();
+            tWords.join();
+            tFinish.start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
