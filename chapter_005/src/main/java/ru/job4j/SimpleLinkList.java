@@ -1,13 +1,22 @@
 package ru.job4j;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+@ThreadSafe
 public class SimpleLinkList<E> implements ListContainer<E> {
-
+    @GuardedBy("this")
     private int size = 0;
+    @GuardedBy("this")
     private Element<E> first;
+    @GuardedBy("this")
     private Element<E> last;
+    @GuardedBy("this")
+    private int modCount = 0;
 
     public SimpleLinkList() {
     }
@@ -25,7 +34,7 @@ public class SimpleLinkList<E> implements ListContainer<E> {
     }
 
     @Override
-    public void add(E e) {
+    public synchronized void add(E e) {
         Element<E> pl = new Element<E>(e, null, size > 0 ? last : null);
         if (size > 0)
             last.next = pl;
@@ -33,18 +42,19 @@ public class SimpleLinkList<E> implements ListContainer<E> {
         if (size == 0)
             first = pl;
         size++;
+        modCount++;
     }
 
-    private boolean correctIndex(int pos) {
+    private synchronized boolean correctIndex(int pos) {
         return 0 <= pos && pos < size;
     }
 
 
-    public int getSize() {
+    public synchronized int getSize() {
         return size;
     }
 
-    public E remove(int index) {
+    public synchronized E remove(int index) {
         if (correctIndex(index)) {
             Element<E> findElement = getEl(index);
             if (index != size - 1) {
@@ -60,27 +70,29 @@ public class SimpleLinkList<E> implements ListContainer<E> {
             E retVal = findElement.item;
             findElement = null;
             size--;
+            modCount++;
             return retVal;
         } else
             throw new NoSuchElementException();
     }
 
-    public void set(int index, E e) {
+    public synchronized void set(int index, E e) {
         if (correctIndex(index)) {
             getEl(index).item = e;
+            modCount++;
         } else
             throw new NoSuchElementException();
     }
 
     @Override
-    public E get(int index) {
+    public synchronized E get(int index) {
         if (correctIndex(index)) {
             return getEl(index).item;
         } else
             throw new NoSuchElementException();
     }
 
-    public boolean contains(E e) {
+    public synchronized boolean contains(E e) {
         boolean res = false;
         if (size > 0) {
             Element<E> el = first;
@@ -95,7 +107,7 @@ public class SimpleLinkList<E> implements ListContainer<E> {
         return res;
     }
 
-    private Element<E> getSingle(int index) {
+    private synchronized Element<E> getSingle(int index) {
         Element<E> returnElement = null;
         int pos;
         int crmnt;
@@ -120,7 +132,7 @@ public class SimpleLinkList<E> implements ListContainer<E> {
     }
 
 
-    private Element<E> getEl(int index) {
+    private synchronized Element<E> getEl(int index) {
         Element<E> returnEl = null;
         switch (size) {
             case 1:
@@ -137,26 +149,37 @@ public class SimpleLinkList<E> implements ListContainer<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public synchronized Iterator<E> iterator() {
         return new Iterator<E>() {
+            @GuardedBy("this")
             private int itIndex = 0;
+            @GuardedBy("this")
+            private int expectedModCount = modCount;
+            @GuardedBy("this")
             Element<E> el = first;
+            @GuardedBy("this")
             Element<E> retEl;
 
             @Override
-            public boolean hasNext() {
-                return correctIndex(itIndex);
+            public synchronized boolean hasNext() {
+                if (expectedModCount == modCount)
+                    return correctIndex(itIndex);
+                else
+                    throw new ConcurrentModificationException();
             }
 
             @Override
-            public E next() {
-                if (correctIndex(itIndex)) {
-                    retEl = el;
-                    el = el.next;
-                    itIndex++;
-                    return retEl.item;
+            public synchronized E next() {
+                if (expectedModCount == modCount) {
+                    if (correctIndex(itIndex)) {
+                        retEl = el;
+                        el = el.next;
+                        itIndex++;
+                        return retEl.item;
+                    } else
+                        throw new NoSuchElementException();
                 } else
-                    throw new NoSuchElementException();
+                    throw new ConcurrentModificationException();
             }
         };
     }
