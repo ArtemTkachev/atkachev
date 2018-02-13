@@ -31,7 +31,6 @@ public class SimpleBlockingQueue<E> {
 
     public E peek() throws InterruptedException {
         synchronized(this.lock) {
-            synchronized (this.lock) {
                 while (0 >= this.size) {
                     lock.wait();
                 }
@@ -40,7 +39,6 @@ public class SimpleBlockingQueue<E> {
                 lock.notify();
                 return value;
             }
-        }
     }
 
 }
