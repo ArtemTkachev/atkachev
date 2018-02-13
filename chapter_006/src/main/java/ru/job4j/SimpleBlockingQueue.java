@@ -11,35 +11,33 @@ public class SimpleBlockingQueue<E> {
     private Queue<E> queue = new LinkedList<>();
     private final Integer maxSize = 10;
     private Integer size = 0;
-    private final Object lockProd = new Object();
-    private final Object lockCons = new Object();
+    private final Object lock = new Object();
 
     public Integer getSize() {
         return size;
     }
 
     public void offer(E value) throws InterruptedException {
-        synchronized(this.lockProd) {
-            synchronized (this.lockCons) {
+        synchronized(this.lock) {
                 while (maxSize <= this.size) {
-                    lockProd.wait();
+                    lock.wait();
                 }
                 queue.offer(value);
                 this.size++;
-                lockCons.notify();
-            }
+                lock.notify();
+
         }
     }
 
     public E peek() throws InterruptedException {
-        synchronized(this.lockCons) {
-            synchronized (this.lockProd) {
+        synchronized(this.lock) {
+            synchronized (this.lock) {
                 while (0 >= this.size) {
-                    lockCons.wait();
+                    lock.wait();
                 }
                 E value = queue.peek();
                 this.size--;
-                lockProd.notify();
+                lock.notify();
                 return value;
             }
         }
