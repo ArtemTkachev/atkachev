@@ -22,6 +22,7 @@ public class SimpleBlockingQueue<E> {
                 while (maxSize <= this.size) {
                     lock.wait();
                 }
+
                 queue.offer(value);
                 this.size++;
                 lock.notify();
@@ -34,6 +35,7 @@ public class SimpleBlockingQueue<E> {
                 while (0 >= this.size) {
                     lock.wait();
                 }
+
                 E value = queue.peek();
                 this.size--;
                 lock.notify();
