@@ -21,6 +21,7 @@ public class SimpleLinkList<E> implements ListContainer<E> {
     public SimpleLinkList() {
     }
 
+
     private static class Element<E> {
         E item;
         Element<E> next;

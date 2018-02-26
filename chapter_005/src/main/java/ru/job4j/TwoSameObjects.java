@@ -11,6 +11,6 @@ public class TwoSameObjects {
         Map<UserM,Object> userObjectMap = new HashMap<>();
         userObjectMap.put(user1,1);
         userObjectMap.put(user2,2);
-        System.out.print(userObjectMap);
+        System.out.println(userObjectMap);
     }
 }
